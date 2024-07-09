@@ -7,3 +7,13 @@ data:
     CREATE DATABASE IF NOT EXISTS keycloak;
     GRANT ALL PRIVILEGES ON *.* TO 'user'@'%' WITH GRANT OPTION;
     FLUSH PRIVILEGES;
+
+# SealedSecretsなどで改善する
+# ---
+# apiVersion: v1
+# kind: Secret
+# metadata:
+#   name: mariadb-secret
+# type: Opaque
+# data:
+#   mariadb-root-password: cGFzc3dvcmQ= # echo -n 'password'|base64
