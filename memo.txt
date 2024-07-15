@@ -3,6 +3,4 @@
     - 複数データベースを立てる？
 
 - Nextcloud
-    - Croneの方が推奨問題
     - Secret問題
-    - values完全には理解していない問題
