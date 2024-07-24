@@ -1,2 +1,7 @@
 NSD + Unbound
 CoreDNS興味ある
+
+```
+$ docker run --name=my-unbound  --volume=./dns/unbound/unbound.conf:/opt/unbound/etc/unbound/unbound.conf  --publish=8053:53/tcp --publish=8053:53/udp --restart=unless-stopped --detach=true mvance/unbound:latest
+$ dig @localhost -p 8053 <>
+```
