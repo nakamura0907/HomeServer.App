@@ -1,0 +1,15 @@
+services:
+  pihole:
+    image: pihole/pihole
+    network_mode: host
+    environment:
+      TZ: "Asia/Tokyo"
+      WEBPASSWORD: password
+      FTLCONF_LOCAL_IPV4: 192.168.2.148
+      WEB_PORT: 8100
+    # volumes:
+    # - './etc-pihole:/etc/pihole'
+    # - './etc-dnsmasq.d:/etc/dnsmasq.d'
+    cap_add:
+      - NET_ADMIN
+    restart: unless-stopped
