@@ -5,8 +5,11 @@ services:
     environment:
       TZ: "Asia/Tokyo"
       WEBPASSWORD: password
-      FTLCONF_LOCAL_IPV4: 192.168.2.148
-      WEB_PORT: 8100
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "67:67/udp"
+      - "80:80/tcp"
     # volumes:
     # - './etc-pihole:/etc/pihole'
     # - './etc-dnsmasq.d:/etc/dnsmasq.d'
