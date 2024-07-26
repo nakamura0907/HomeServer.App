@@ -1,1 +1,10 @@
-# services:
+services:
+  mariadb:
+    image: mariadb
+    volumes:
+      - ./mariadb/data:/var/lib/mysql
+      - ./mariadb/init:/docker-entrypoint-initdb.d
+    environment:
+      MARIADB_RANDOM_ROOT_PASSWORD: 1
+      MARIADB_USER: user
+      MARIADB_PASSWORD: password
