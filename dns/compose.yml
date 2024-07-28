@@ -16,3 +16,11 @@ services:
     cap_add:
       - NET_ADMIN
     restart: unless-stopped
+  unbound:
+    image: mvance/unbound-rpi
+    ports:
+      - "5054:53/tcp"
+      - "5054:53/udp"
+    volumes:
+      - ./unbound/unbound.conf:/opt/unbound/etc/unbound/unbound.conf
+    restart: unless-stopped

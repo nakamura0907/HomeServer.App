@@ -6,3 +6,10 @@ pi-hole + Unbound
 $ docker run --name=my-unbound  --volume=./dns/unbound/unbound.conf:/opt/unbound/etc/unbound/unbound.conf  --publish=8053:53/tcp --publish=8053:53/udp --restart=unless-stopped --detach=true mvance/unbound:latest
 $ dig @localhost -p 8053 <ドメイン>
 ```
+
+- rootlessにしてポートフォワーディング
+- pi-holeを設定ファイルベースに
+- pi-holeとUnboundを連携させる
+    - 優先順位の設定ができなかったので、Unboundだけ指定する
+        - そもunbound側で設定すれば、、、
+    - Unboundのポート開放しなくていい説
