@@ -4,5 +4,4 @@
 
 - Nextcloud
     - Secret問題
-    - trusted_domains
     - `php occ`
