@@ -2,6 +2,13 @@
     - Secret問題
     - `php occ`
 
+- Docker
+    - pi-hole
+        - 全体
+        - `pi-hole Published ports are discarded when using host network mode`
+    - Unboundのポート
+        - network_mode: hostとbridgeの両立は不可能
+
 - Secret git問題
 - Databaseユーザー問題
 - Ingress

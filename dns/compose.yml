@@ -5,11 +5,12 @@ services:
     environment:
       TZ: "Asia/Tokyo"
       WEBPASSWORD: password
+      WEB_PORT: 8080
     ports:
       - "53:53/tcp"
       - "53:53/udp"
       - "67:67/udp"
-      - "80:80/tcp"
+      - "8080:8080/tcp"
     volumes:
     - './pihole/etc-pihole:/etc/pihole'
     - './pihole/etc-dnsmasq.d:/etc/dnsmasq.d'
