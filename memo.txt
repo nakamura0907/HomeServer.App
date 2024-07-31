@@ -5,3 +5,6 @@
 - Nextcloud
     - Secret問題
     - `php occ`
+- Ingress
+- DNS設定改善
+- SAML&SSO設定改善
