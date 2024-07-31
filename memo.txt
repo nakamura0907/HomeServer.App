@@ -1,10 +1,15 @@
-- Secret git問題
-- Databaseユーザー問題
-    - 複数データベースを立てる？
-
 - Nextcloud
     - Secret問題
     - `php occ`
+
+- Secret git問題
+- Databaseユーザー問題
 - Ingress
 - DNS設定改善
 - SAML&SSO設定改善
+
+- アイデア
+    - Prometheus + Grafana
+    - OpenMediaVault
+    - Syncthing
+    - Vault（KubernetesのSecret管理できるなら）
