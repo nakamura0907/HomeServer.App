@@ -1,5 +1,5 @@
 ---
-- name: LXC Container
+- name: LXC Container Playbook
   hosts: lxc_container
   roles:
     - role: lxc_initial_setup
