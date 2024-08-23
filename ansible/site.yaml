@@ -1,0 +1,3 @@
+---
+- name: LXC Container
+  ansible.builtin.import_playbook: lxc_container.yaml

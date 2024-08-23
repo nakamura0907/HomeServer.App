@@ -1,0 +1,6 @@
+---
+- name: LXC Container
+  hosts: lxc_container
+  roles:
+    - role: lxc_initial_setup
+      tags: lxc_initial_setup
