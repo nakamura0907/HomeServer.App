@@ -1,0 +1,8 @@
+---
+- name: Monitoring Group Playbook
+  hosts: monitoring
+  roles:
+    - role: prometheus
+      tags: prometheus
+    - role: grafana
+      tags: grafana
