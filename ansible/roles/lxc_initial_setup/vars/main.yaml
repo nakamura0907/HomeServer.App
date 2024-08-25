@@ -1,0 +1,1 @@
+lxc_initial_setup_user_password: "{{ lookup('env', 'ANSIBLE_USER_PASSWORD') | default('password') }}"

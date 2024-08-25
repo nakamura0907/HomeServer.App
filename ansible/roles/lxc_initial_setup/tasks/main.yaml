@@ -1,8 +1,19 @@
+---
+- name: Create Ansible User
+  ansible.builtin.user:
+    user: ansible
+    password: "{{ lxc_initial_setup_user_password | password_hash('sha512') }}"
+    groups:
+      - sudo
+    append: true
+
+# sudo without password
+# Setup authorized keys
+
 - name: Upgrade all package
   ansible.builtin.apt:
     update_cache: true
     cache_valid_time: 3600
-    # upgrade: true
 
 - name: Install apt packages
   ansible.builtin.apt:
@@ -10,6 +21,6 @@
       - curl
       - git
 
-- name: Set timezone to Asia/Tokyo
-  community.general.timezone:
-    name: Asia/Tokyo
+# - name: Set timezone to Asia/Tokyo
+  # community.general.timezone:
+    # name: Asia/Tokyo
