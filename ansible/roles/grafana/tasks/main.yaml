@@ -5,12 +5,19 @@
       - gnupg
     update_cache: true
 
+# - name: Add grafana gpg key
+  # shell: curl https://packages.grafana.com/gpg.key | sudo apt-key add -
 - name: Add grafana gpg key
-  shell: curl https://packages.grafana.com/gpg.key | sudo apt-key add -
+  ansible.builtin.get_url:
+    url: https://packages.grafana.com/gpg.key
+    dest: /etc/apt/keyrings/grafana.asc
+    mode: '0644'
+    force: true
 
 - name: Add grafana repo
   ansible.builtin.apt_repository:
-    repo: deb https://packages.grafana.com/oss/deb stable main
+    # repo: deb https://packages.grafana.com/oss/deb stable main
+    repo: deb [signed-by=/etc/apt/keyrings/grafana.asc] https://packages.grafana.com/oss/deb stable main
     state: present
     filename: grafana
 
