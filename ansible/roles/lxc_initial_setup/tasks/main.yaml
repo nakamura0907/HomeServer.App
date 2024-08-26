@@ -5,10 +5,20 @@
     password: "{{ lxc_initial_setup_user_password | password_hash('sha512') }}"
     groups:
       - sudo
+    createhome: true
+    shell: /bin/bash
     append: true
 
-# sudo without password
-# Setup authorized keys
+- name: Allow execute sudo commands without password
+  ansible.builtin.copy:
+    dest: /etc/sudoers.d/ansible
+    content: "ansible ALL=(ALL) NOPASSWD:ALL"
+    mode: '0440'
+
+- name: Set up authorized keys
+  ansible.posix.authorized_key:
+    user: ansible
+    key: "{{ lookup('file', lxc_initial_setup_public_key) }}"
 
 - name: Upgrade all package
   ansible.builtin.apt:

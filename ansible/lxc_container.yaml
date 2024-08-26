@@ -1,6 +1,8 @@
 ---
 - name: LXC Container Playbook
   hosts: lxc_container
+  vars:
+    ansible_ssh_user: root
   roles:
     - role: lxc_initial_setup
       tags: lxc_initial_setup
