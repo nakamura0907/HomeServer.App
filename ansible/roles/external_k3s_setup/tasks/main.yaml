@@ -2,3 +2,4 @@
   ansible.builtin.apt:
     name:
       - prometheus-node-exporter
+  become: true

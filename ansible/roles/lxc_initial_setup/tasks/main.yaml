@@ -3,17 +3,12 @@
   ansible.builtin.user:
     user: ansible
     password: "{{ lxc_initial_setup_user_password | password_hash('sha512') }}"
+    update_password: on_create
     groups:
       - sudo
     createhome: true
     shell: /bin/bash
     append: true
-
-- name: Allow execute sudo commands without password
-  ansible.builtin.copy:
-    dest: /etc/sudoers.d/ansible
-    content: "ansible ALL=(ALL) NOPASSWD:ALL"
-    mode: '0440'
 
 - name: Set up authorized keys
   ansible.posix.authorized_key:
