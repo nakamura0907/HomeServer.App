@@ -1,0 +1,8 @@
+[Service]
+User={{ prometheus_system_user }}
+Group={{ prometheus_system_group }}
+ExecStart=/usr/bin/prometheus \
+    --config.file=/etc/prometheus/prometheus.yml \
+    --storage.tsdb.path=/var/lib/prometheus/ \
+    --web.console.templates=/etc/prometheus/consoles \
+    --web.console.libraries=/etc/prometheus/console_libraries
