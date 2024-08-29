@@ -1,24 +1,6 @@
 ---
-- name: Create prometheus system group
-  ansible.builtin.group:
-    name: "{{ prometheus_system_group }}"
-    system: true
-
-- name: Create prometheus system user
-  ansible.builtin.user:
-    name: "{{ prometheus_system_user }}"
-    system: true
-    shell: "/usr/sbin/nologin"
-    group: "{{ prometheus_system_group }}"
-    createhome: false
-
-# ディレクトリの所有権変更 または 新しく作る
-
 - name: Install Prometheus
   ansible.builtin.apt:
     name:
       - prometheus
-
-# ここからは別タスク
-# 設定ファイルの編集
-# システムファイルの編集
+  become: true

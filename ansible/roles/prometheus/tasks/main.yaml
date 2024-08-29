@@ -1,16 +1,10 @@
-- name: Install Prometheus
-  ansible.builtin.apt:
-    name:
-      - prometheus
-  become: true
+- name: Install
+  ansible.builtin.include_tasks:
+    file: install.yaml
 
-- name: Configure Prometheus
-  ansible.builtin.template:
-    src: prometheus.yml.j2
-    dest: /etc/prometheus/prometheus.yml
-    owner: prometheus
-    group: prometheus
-    mode: "0644"
+- name: Configure
+  ansible.builtin.include_tasks:
+    file: configure.yaml
 
 - name: Start and enable Prometheus service
   ansible.builtin.systemd:
