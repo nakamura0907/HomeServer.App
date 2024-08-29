@@ -7,5 +7,5 @@
     owner: prometheus
     group: prometheus
     mode: "0644"
-  notify: 
+  notify:
     - reload prometheus

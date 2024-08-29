@@ -1,32 +1,11 @@
-- name: Add grafana gpg key
-  become: true
-  ansible.builtin.get_url:
-    url: https://packages.grafana.com/gpg.key
-    dest: /etc/apt/keyrings/grafana.asc
-    mode: '0644'
-    force: true
+---
+- name: Install
+  ansible.builtin.include_tasks:
+    file: install.yaml
 
-- name: Add grafana repo
-  become: true
-  ansible.builtin.apt_repository:
-    repo: deb [signed-by=/etc/apt/keyrings/grafana.asc] https://packages.grafana.com/oss/deb stable main
-    state: present
-    filename: grafana
-
-- name: Install Grafana
-  become: true
-  ansible.builtin.apt:
-    name:
-      - grafana
-
-- name: Configure Grafana
-  become: true
-  ansible.builtin.template:
-    src: grafana.ini.j2
-    dest: /etc/grafana/grafana.ini
-    owner: grafana
-    group: grafana
-    mode: "0644"
+- name: Configure
+  ansible.builtin.include_tasks:
+    file: configure.yaml
 
 - name: Start and enable Grafana service
   become: true
@@ -34,3 +13,4 @@
     name: grafana-server
     enabled: true
     state: started
+    daemon_reload: true
