@@ -1,13 +1,5 @@
-- name: Install nessesary package
-  ansible.builtin.apt:
-    name:
-      - apt-transport-https
-      - gnupg
-    update_cache: true
-
-# - name: Add grafana gpg key
-  # shell: curl https://packages.grafana.com/gpg.key | sudo apt-key add -
 - name: Add grafana gpg key
+  become: true
   ansible.builtin.get_url:
     url: https://packages.grafana.com/gpg.key
     dest: /etc/apt/keyrings/grafana.asc
@@ -15,18 +7,20 @@
     force: true
 
 - name: Add grafana repo
+  become: true
   ansible.builtin.apt_repository:
-    # repo: deb https://packages.grafana.com/oss/deb stable main
     repo: deb [signed-by=/etc/apt/keyrings/grafana.asc] https://packages.grafana.com/oss/deb stable main
     state: present
     filename: grafana
 
 - name: Install Grafana
+  become: true
   ansible.builtin.apt:
     name:
       - grafana
 
 - name: Configure Grafana
+  become: true
   ansible.builtin.template:
     src: grafana.ini.j2
     dest: /etc/grafana/grafana.ini
@@ -35,6 +29,7 @@
     mode: "0644"
 
 - name: Start and enable Grafana service
+  become: true
   ansible.builtin.systemd:
     name: grafana-server
     enabled: true
