@@ -3,5 +3,5 @@
   listen: "reload grafana"
   become: true
   ansible.builtin.systemd:
-    name: grafana
-    state: reloaded
+    name: grafana-server
+    state: restarted # reloaded not supported

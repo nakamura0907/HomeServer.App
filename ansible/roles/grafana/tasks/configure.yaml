@@ -10,13 +10,13 @@
   notify:
     - reload grafana
 
-# - name: Configure Datasources
-#   become: true
-#   copy:
-#     src: datasources/prometheus.yaml
-#     dest: /etc/grafana/provisioning/datasources/
-#     owner: grafana
-#     group: grafana
-#     mode: "0644"
-#   notify:
-#     - reload grafana
+- name: Configure Datasources
+  become: true
+  ansible.builtin.copy:
+    src: datasources/prometheus.yaml
+    dest: /etc/grafana/provisioning/datasources/prometheus.yaml
+    owner: grafana
+    group: grafana
+    mode: "0644"
+  notify:
+    - reload grafana
