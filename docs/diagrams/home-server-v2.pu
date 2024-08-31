@@ -1,0 +1,11 @@
+@startuml home-server-v2
+
+!define SPRITESURL https://raw.githubusercontent.com/plantuml-stdlib/gilbarbara-plantuml-sprites/v1.1/sprites
+!includeurl SPRITESURL/grafana.puml
+!includeurl SPRITESURL/prometheus.puml
+
+title 自宅サーバ v2
+
+rectangle "<$grafana>\n\n<$prometheus>" as monitoring
+
+@enduml
