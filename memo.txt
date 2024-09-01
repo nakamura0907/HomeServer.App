@@ -16,7 +16,6 @@
 - SAML&SSO設定改善
 
 - アイデア
-    - Prometheus + Grafana
     - OpenMediaVault
     - Syncthing
     - Vault（KubernetesのSecret管理できるなら）

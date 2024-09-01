@@ -6,6 +6,7 @@ variable "target_node" {
 variable "hostname" {
   description = "Specifies the host name of the container."
   type = string
+  default = null
 }
 
 variable "clone" {
