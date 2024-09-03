@@ -1,5 +1,5 @@
 variable "target_node" {
-  type = string
+  type    = string
   default = "proxmox"
 }
 
@@ -15,6 +15,6 @@ variable "ssh_public_keys" {
 
 // モニタリング
 variable "monitoring_hostname" {
-  type = string
+  type    = string
   default = "monitoring"
 }
