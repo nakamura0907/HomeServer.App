@@ -45,6 +45,12 @@ variable "network_bridge" {
   default     = "vmbr0"
 }
 
+variable "network_firewall" {
+  description = "A boolean to enable the firewall on the network interface."
+  type = bool
+  default = true
+}
+
 variable "network_ip" {
   description = "The IPv4 address of the network interface. Can be a static IPv4 address (in CIDR notation), 'dhcp', or 'manual'."
   type        = string
@@ -66,7 +72,7 @@ variable "rootfs_size" {
 variable "rootfs_storage" {
   description = "A string containing the volume , directory, or device to be mounted into the container (at the path specified by mp). E.g. local-lvm, local-zfs, local etc."
   type        = string
-  default     = "local-zfs"
+  default     = "local-lvm"
 }
 
 variable "ssh_public_keys" {

@@ -1,4 +1,5 @@
 // モニタリング
+// FIXME: startがTASK ERROR: can't lock file '/run/lock/lxc/pve-config-102.lock' - got timeoutで失敗
 module "monitoring" {
   source = "../modules/proxmox-lxc"
 

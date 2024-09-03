@@ -1,3 +1,7 @@
+variable "pm_api_url" {
+  type = string
+}
+
 variable "target_node" {
   type    = string
   default = "proxmox"
@@ -5,8 +9,7 @@ variable "target_node" {
 
 variable "basic_ostemplate" {
   type = string
-  // TODO: 修正
-  default = "local:vztmpl/ubuntu-20.04-standard_20.04-1_amd64.tar.gz"
+  default = "local:vztmpl/ubuntu-23.10-standard_23.10-1_amd64.tar.zst"
 }
 
 variable "ssh_public_keys" {

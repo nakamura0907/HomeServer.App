@@ -1,6 +1,6 @@
 
 resource "proxmox_lxc" "basic" {
-  target_node = variable.target_node
+  target_node = var.target_node
 
   ostemplate      = var.ostemplate
   cmode           = var.cmode

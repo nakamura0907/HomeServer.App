@@ -8,5 +8,6 @@ terraform {
 }
 
 provider "proxmox" {
-  # Configuration options
+  // TODO: 接続情報の管理最適化
+  pm_api_url = var.pm_api_url
 }
