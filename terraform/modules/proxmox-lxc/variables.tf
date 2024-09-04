@@ -92,3 +92,9 @@ variable "swap" {
   type        = number
   default     = 0
 }
+
+variable "vmid" {
+  description = "A number that sets the VMID of the container. If set to 0, the next available VMID is used."
+  type        = number
+  default     = null
+}

@@ -1,6 +1,14 @@
 variable "pm_api_url" {
   type = string
 }
+variable "pm_api_token_id" {
+  type      = string
+  sensitive = true
+}
+variable "pm_api_token_secret" {
+  type      = string
+  sensitive = true
+}
 
 variable "target_node" {
   type    = string
@@ -8,7 +16,7 @@ variable "target_node" {
 }
 
 variable "basic_ostemplate" {
-  type = string
+  type    = string
   default = "local:vztmpl/ubuntu-23.10-standard_23.10-1_amd64.tar.zst"
 }
 

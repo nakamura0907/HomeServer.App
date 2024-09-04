@@ -12,6 +12,7 @@ resource "proxmox_lxc" "basic" {
   start           = var.start
   swap            = var.swap
   unprivileged    = true
+  vmid            = var.vmid
 
   // Terraform will crash without rootfs defined
   rootfs {
