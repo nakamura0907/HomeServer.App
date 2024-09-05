@@ -1,0 +1,41 @@
+# https://ipv6.rs/tutorial/Ubuntu_Server_Latest/CoreDNS/
+---
+- name: Check if CoreDNS binary already exists
+  ansible.builtin.stat:
+    path: "/tmp/coredns_{{ coredns_version }}_linux_amd64.tgz"
+  register: coredns_file
+
+- name: Download CoreDNS binary
+  ansible.builtin.get_url:
+    url: "https://github.com/coredns/coredns/releases/download/v{{ coredns_version }}/coredns_{{ coredns_version }}_linux_amd64.tgz"
+    dest: "/tmp/coredns_{{ coredns_version }}_linux_amd64.tgz"
+    mode: "0644"
+  when: not coredns_file.stat.exists
+
+- name: Unpack coredns binary
+  ansible.builtin.unarchive:
+    src: "/tmp/coredns_{{ coredns_version }}_linux_amd64.tgz"
+    dest: "/tmp/coredns_{{ coredns_version }}_linux_amd64"
+    creates: "/tmp/coredns_{{ coredns_version }}_linux_amd64/coredns"
+  when: not coredns_file.stat.exists
+
+- name: Copy coredns binaries
+  ansible.builtin.copy:
+    src: "/tmp/coredns_{{ coredns_version }}_linux_amd64/coredns"
+    dest: "/usr/local/bin/coredns"
+    mode: "0750"
+    owner: "{{ coredns_system_user }}"
+    group: "{{ coredns_system_group }}"
+  notify:
+    - restart coredns
+  when: not coredns_file.stat.exists
+
+- name: Copy coredns systemd service file
+  ansible.builtin.template:
+    src: coredns.service.j2
+    dest: /etc/systemd/system/coredns.service
+    owner: "{{ coredns_system_user }}"
+    group: "{{ coredns_system_group }}"
+    mode: "0644"
+  notify:
+    - restart coredns

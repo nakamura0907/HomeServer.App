@@ -1,0 +1,12 @@
+---
+- name: Install
+  ansible.builtin.import_tasks:
+    file: install.yaml
+
+- name: Start and enable CoreDNS
+  become: true
+  ansible.builtin.systemd:
+    name: coredns
+    enabled: true
+    state: started
+    daemon_reload: true

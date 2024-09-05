@@ -1,0 +1,14 @@
+[Unit]
+Description=CoreDNS DNS Server
+After=network.target
+
+[Service]
+Type=simple
+
+User={{ coredns_system_user }}
+Group={{ coredns_system_group }}
+ExecStart=/usr/local/bin/coredns \
+    -conf /etc/coredns/Corefile
+
+[Install]
+WantedBy=multi-user.target
