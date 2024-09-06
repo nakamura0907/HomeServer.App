@@ -29,3 +29,13 @@ variable "monitoring_hostname" {
   type    = string
   default = "monitoring"
 }
+
+// DNS Server
+variable "homedns_hostname" {
+  type    = string
+  default = "homedns"
+}
+
+variable "homedns_network_ip" {
+  type = string
+}

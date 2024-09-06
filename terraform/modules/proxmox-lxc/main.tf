@@ -1,5 +1,5 @@
 
-resource "proxmox_lxc" "basic" {
+resource "proxmox_lxc" "this" {
   target_node = var.target_node
 
   ostemplate      = var.ostemplate

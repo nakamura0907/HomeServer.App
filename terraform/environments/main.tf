@@ -9,3 +9,15 @@ module "monitoring" {
   hostname        = var.monitoring_hostname
   ssh_public_keys = var.ssh_public_keys
 }
+
+// DNS Server
+module "homedns" {
+  source = "../modules/proxmox-lxc"
+
+  target_node = var.target_node
+
+  ostemplate      = var.basic_ostemplate
+  hostname        = var.homedns_hostname
+  ssh_public_keys = var.ssh_public_keys
+  network_ip      = var.homedns_network_ip
+}
