@@ -24,12 +24,6 @@ variable "ssh_public_keys" {
   type = string
 }
 
-// モニタリング
-variable "monitoring_hostname" {
-  type    = string
-  default = "monitoring"
-}
-
 // DNS Server
 variable "homedns_hostname" {
   type    = string
@@ -37,5 +31,25 @@ variable "homedns_hostname" {
 }
 
 variable "homedns_network_ip" {
+  type = string
+}
+
+variable "homedns_vmid" {
+  type    = number
+  default = 201
+}
+
+// モニタリング
+variable "monitoring_hostname" {
+  type    = string
+  default = "monitoring"
+}
+
+variable "monitoring_vmid" {
+  type    = number
+  default = 202
+}
+
+variable "monitoring_network_ip" {
   type = string
 }

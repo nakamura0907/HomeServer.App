@@ -57,6 +57,12 @@ variable "network_ip" {
   default     = "dhcp"
 }
 
+variable "onboot" {
+  description = "A boolean that determines if the container will start on boot."
+  type        = bool
+  default     = null
+}
+
 variable "password" {
   description = "Sets the root password inside the container."
   type        = string
