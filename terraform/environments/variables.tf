@@ -17,7 +17,7 @@ variable "target_node" {
 
 variable "basic_ostemplate" {
   type    = string
-  default = "local:vztmpl/ubuntu-22.04-standard_22.04-1_amd64.tar.zst"
+  default = "local:vztmpl/debian-12-standard_12.2-1_amd64.tar.zst"
 }
 
 variable "ssh_public_keys" {
