@@ -1,0 +1,3 @@
+---
+lxc_initial_setup_user_password: "password"
+lxc_initial_setup_public_key: "~/.ssh/id_ed25519.pub"

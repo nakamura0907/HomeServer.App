@@ -1,7 +1,0 @@
----
-- name: LXC Container
-  ansible.builtin.import_playbook: lxc_container.yaml
-- name: External K3s Cluster
-  ansible.builtin.import_playbook: external_k3s.yaml
-- name: Monitoring Group
-  ansible.builtin.import_playbook: monitoring.yaml

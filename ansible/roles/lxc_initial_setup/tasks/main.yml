@@ -13,7 +13,7 @@
 - name: Set up authorized keys
   ansible.posix.authorized_key:
     user: ansible
-    key: "{{ lookup('file', lxc_initial_setup_public_key) }}"
+    key: "{{ lookup('file', lxc_initial_setup_public_key ) }}"
 
 - name: Upgrade all package
   ansible.builtin.apt:

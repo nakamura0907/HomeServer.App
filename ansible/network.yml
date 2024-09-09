@@ -1,0 +1,6 @@
+---
+- name: Network Group Playbook
+  hosts: network
+  roles:
+    - role: coredns
+      tags: coredns
