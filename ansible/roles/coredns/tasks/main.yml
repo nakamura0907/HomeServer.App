@@ -1,7 +1,9 @@
 ---
 - name: Install
   ansible.builtin.import_tasks:
-    file: install.yaml
+    file: install.yml
+
+# Sep 10 01:27:49 homedns coredns[3605]: loading Caddyfile via flag: open /etc/coredns/Corefile: no such fi>
 
 - name: Start and enable CoreDNS
   become: true
