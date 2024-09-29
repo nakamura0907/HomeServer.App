@@ -3,7 +3,7 @@
   ansible.builtin.import_tasks:
     file: install.yml
 
-# Listen: listen tcp :53: bind: permission denied
+#  dial udp 8.8.8.8:53: connect: network is unreachable
 - name: Copy Coredns file
   ansible.builtin.template:
     src: Corefile.j2
