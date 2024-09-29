@@ -1,20 +1,29 @@
 # https://ipv6.rs/tutorial/Ubuntu_Server_Latest/CoreDNS/
 ---
 - name: Create the coredns group
-  group:
+  ansible.builtin.group:
     name: "{{ coredns_system_group }}"
     state: present
     system: true
   become: true
 
 - name: Create the coredns user
-  user:
+  ansible.builtin.user:
     name: "{{ coredns_system_user }}"
     groups: "{{ coredns_system_group }}"
     shell: /usr/sbin/nologin
     system: true
     createhome: false
     home: /
+  become: true
+
+- name: Create coredns configuration directories
+  ansible.builtin.file:
+    path: /etc/coredns
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
   become: true
 
 - name: Check if CoreDNS binary already exists
@@ -32,10 +41,10 @@
 
 
 - name: Create unpack dir
-  file:
+  ansible.builtin.file:
     path: "/tmp/coredns_{{ coredns_version }}_linux_amd64"
     state: directory
-    mode: 0755
+    mode: "0755"
   delegate_to: localhost
 
 - name: Unpack coredns binary
