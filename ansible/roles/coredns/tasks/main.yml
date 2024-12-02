@@ -3,7 +3,6 @@
   ansible.builtin.import_tasks:
     file: install.yml
 
-#  dial udp 8.8.8.8:53: connect: network is unreachable
 - name: Copy Coredns file
   ansible.builtin.template:
     src: Corefile.j2
