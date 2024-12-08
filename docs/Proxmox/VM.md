@@ -9,10 +9,10 @@ VMは基本的にCloud-init設定をしたテンプレートをクローンす�
 - [Debian](https://cdimage.debian.org/images/cloud/)
 
 ```bash
-$ wget <cloud-image>.qcow2
+$ wget https://cdimage.debian.org/images/cloud/bookworm/20241110-1927/debian-12-generic-amd64-20241110-1927.qcow2
 
 $ qm create 8000 --memory 2048 --net0 virtio,bridge=vmbr0 --scsihw virtio-scsi-pci
-$ qm set 8000 --scsi0 local-lvm:0,import-from=/path/to/bionic-server-cloudimg-amd64.img
+$ qm set 8000  --scsi0 local-lvm:0,import-from=/root/debian-12-generic-amd64-20241110-1927.qcow2
 
 $ qm set 8000 --ide2 local-lvm:cloudinit
 $ qm set 8000 --boot order=scsi0
