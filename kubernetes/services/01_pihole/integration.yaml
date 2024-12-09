@@ -33,7 +33,7 @@ metadata:
   namespace: dns
 data:
   custom-dns-entries: |
-    192.168.0.231 pihole.homelab
+    192.168.0.231 pihole.homelab.
 
 ---
 apiVersion: v1
