@@ -73,7 +73,17 @@ spec:
     metadata:
       labels:
         app: pihole
+      # annotations:
+      #   vault.hashicorp.com/agent-inject: 'true'
+      #   vault.hashicorp.com/tls-skip-verify: "true"
+      #   vault.hashicorp.com/role: 'dns-app'
+      #   vault.hashicorp.com/agent-inject-secret-config: 'secret/data/kubernetes/pihole'
+      #   vault.hashicorp.com/agent-inject-template-config: |
+      #     {{ with secret "secret/data/kubernetes/pihole" -}}
+      #       export WEBPASSWORD="{{ .Data.data.password }}"
+      #     {{- end }}
     spec:
+      serviceAccountName: internal-app
       containers:
       - name: pihole
         image: pihole/pihole:2024.07.0
@@ -93,11 +103,6 @@ spec:
         - containerPort: 53
           name: dns-udp
           protocol: UDP
-        env:
-        - name: TZ
-          value: "Asia/Tokyo"
-        - name: WEBPASSWORD
-          value: "password"
         volumeMounts:
         - name: custom-dns-config
           mountPath: /etc/pihole/custom.list
@@ -108,6 +113,20 @@ spec:
         - name: interface-settings-config
           mountPath: /etc/dnsmasq.d/02-bind-interface.conf
           subPath: 02-bind-interface
+        - name: pihole-secret
+          mountPath: '/mnt/secrets-store'
+          readOnly: true
+        - name: vault-dns-creds-2
+          mountPath: /k8s-secret
+          readOnly: true
+        env:
+        - name: TZ
+          value: "Asia/Tokyo"
+        - name: WEBPASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: pihole-secret
+              key: password
       volumes:
       - name: custom-dns-config
         configMap:
@@ -118,3 +137,12 @@ spec:
       - name: interface-settings-config
         configMap:
           name: pihole-interface-settings
+      - name: pihole-secret
+        csi:
+          driver: 'secrets-store.csi.k8s.io'
+          readOnly: true
+          volumeAttributes:
+            secretProviderClass: pihole-secret
+      - name: vault-dns-creds-2
+        secret:
+          secretName: pihole-secret

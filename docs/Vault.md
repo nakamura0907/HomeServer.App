@@ -19,8 +19,7 @@ https://developer.hashicorp.com/vault/tutorials/kubernetes/kubernetes-external-v
 
 $ kubectl create sa internal-app
 
-$ helm install vault hashicorp/vault \
-    --set "global.externalVaultAddr=https://192.168.0.211:8200"
+$ helm install vault hashicorp/vault --set "global.externalVaultAddr=https://192.168.0.211:8200" -n secret-manager
     
 $ cat > vault-secret.yaml <<EOF
 apiVersion: v1
@@ -32,13 +31,16 @@ metadata:
 type: kubernetes.io/service-account-token
 EOF
 
-$ VAULT_HELM_SECRET_NAME=$(kubectl get secrets --output=json | jq -r '.items[].metadata | select(.name|startswith("vault-token-")).name')
+$ VAULT_ADDR="https://192.168.0.211:8200"
+$ VAULT_SKIP_VERIFY=true 
 
-$ TOKEN_REVIEW_JWT=$(kubectl get secret $VAULT_HELM_SECRET_NAME --output='go-template={{ .data.token }}' | base64 --decode)
+$ VAULT_HELM_SECRET_NAME=$(kubectl get secrets --output=json -n secret-manager | jq -r '.items[].metadata | select(.name|startswith("vault-token-")).name')
 
-$ KUBE_CA_CERT=$(kubectl config view --raw --minify --flatten --output='jsonpath={.clusters[].cluster.certificate-authority-data}' | base64 --decode)
+$ TOKEN_REVIEW_JWT=$(kubectl get secret $VAULT_HELM_SECRET_NAME --output='go-template={{ .data.token }}' -n secret-manager | base64 --decode)
 
-$ KUBE_HOST=$(kubectl config view --raw --minify --flatten --output='jsonpath={.clusters[].cluster.server}')
+$ KUBE_CA_CERT=$(kubectl config view --raw --minify --flatten --output='jsonpath={.clusters[].cluster.certificate-authority-data}' -n secret-manager | base64 --decode)
+
+$ KUBE_HOST=$(kubectl config view --raw --minify --flatten --output='jsonpath={.clusters[].cluster.server}' -n secret-manager)
 
 $ vault write auth/kubernetes/config \
      token_reviewer_jwt="$TOKEN_REVIEW_JWT" \
@@ -46,7 +48,35 @@ $ vault write auth/kubernetes/config \
      kubernetes_ca_cert="$KUBE_CA_CERT" \
      issuer="https://kubernetes.default.svc.cluster.local"
 
+$ vault kv put secret/kubernetes/xxx 
 
+$ vault policy write kubernetes-secrets - <<EOF
+path "secret/data/kubernetes/*" {
+  capabilities = ["read"]
+}
+EOF
+
+$ vault write auth/kubernetes/role/xxx-app \
+     bound_service_account_names=xxx-app \
+     bound_service_account_namespaces=xxx \
+     policies=kubernetes-secrets \
+     ttl=24h
+
+
+Vault CSI Provider
+
+helm repo add secrets-store-csi-driver https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts
+helm install csi-secrets-store secrets-store-csi-driver/secrets-store-csi-driver --namespace kube-system
+helm install vault hashicorp/vault -n secret-manager \
+  --set "server.enabled=false" \
+  --set "injector.enabled=false" \
+  --set "csi.enabled=true"
+
+CSIドライバに権限を与える
+
+kubectl logs -n kube-system -l app=secrets-store-csi-driver
+
+ClusterRoleとClusterRoleBindingを作成する
 
 ## 要件
 
