@@ -1,11 +1,11 @@
+# MetalLB
+
+[MetalLB](https://metallb.github.io/metallb)
+
+インストールコマンド例
 ```bash
 $ helm repo add metallb https://metallb.github.io/metallb
-
-$ kubectl apply -f ../../../namespaces/metallb-system.yaml
-$ helm install metallb metallb/metallb --namespace metallb-system
-
-$ kubectl apply -f ./metallb-config.yaml
-$ kubectl apply -f ./metallb-test.yaml
+$ helm install metallb metallb/metallb
 ```
 
 ## K3sの場合

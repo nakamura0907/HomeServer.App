@@ -1,5 +1,40 @@
 # Vault
 
+## 【LXC】　インストール
+
+```bash
+wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+sudo apt update && sudo apt install vault
+
+openssl req -x509 -nodes -newkey rsa:4096 -keyout /etc/vault.d/vault.key -out /etc/vault.d/vault.crt -subj "/CN=vault.local" -addext "subjectAltName=IP:192.168.0.211"
+chown vault:vault /etc/vault.d/vault.key /etc/vault.d/vault.crt
+```
+
+`/etc/vault.d/vault.hcl`の編集
+
+```hcl
+# HTTPS listener
+listener "tcp" {
+  address       = "0.0.0.0:8200"
+ # tls_cert_file = "/opt/vault/tls/tls.crt"
+ #  tls_key_file  = "/opt/vault/tls/tls.key"
+  tls_cert_file = "/etc/vault.d/vault.crt"
+  tls_key_file = "/etc/vault.d/vault.key"
+}
+
+# 省略
+
+disable_mlock = true
+api_addr = "https://192.168.0.211:8200"
+```
+
+## セットアップ
+
+### Kubernetes
+
+## OLD
+
 メモ
 問題点
 - Vault難しい
