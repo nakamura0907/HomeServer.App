@@ -31,6 +31,13 @@ api_addr = "https://192.168.0.211:8200"
 
 ## セットアップ
 
+### クライアント側
+
+```bash
+export VAULT_ADDR="https://192.168.0.211:8200"
+export VAULT_SKIP_VERIFY=true
+```
+
 ### Kubernetes
 
 ## OLD
