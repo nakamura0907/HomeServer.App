@@ -73,6 +73,10 @@ variable "k3s_agent_storage_size" {
 }
 
 // リソース別
+variable "k3s_server_1_name" {
+  type    = string
+  default = "k3s-server-1"
+}
 variable "k3s_server_1_vmid" {
   type    = number
   default = 9110
@@ -82,6 +86,10 @@ variable "k3s_server_1_ipconfig" {
   default = "ip=192.168.0.110/24"
 }
 
+variable "k3s_agent_1_name" {
+  type    = string
+  default = "k3s-agent-1"
+}
 variable "k3s_agent_1_vmid" {
   type    = number
   default = 9111
@@ -89,4 +97,17 @@ variable "k3s_agent_1_vmid" {
 variable "k3s_agent_1_ipconfig" {
   type    = string
   default = "ip=192.168.0.111/24"
+}
+
+variable "k3s_agent_2_name" {
+  type    = string
+  default = "k3s-agent-2"
+}
+variable "k3s_agent_2_vmid" {
+  type    = number
+  default = 9112
+}
+variable "k3s_agent_2_ipconfig" {
+  type    = string
+  default = "ip=192.168.0.112/24"
 }
