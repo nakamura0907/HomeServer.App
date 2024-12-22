@@ -1,81 +1,43 @@
-terraform {
-  required_providers {
-    proxmox = {
-      source  = "Telmate/proxmox"
-      version = "3.0.1-rc4"
-    }
-  }
-}
+// k3s_server
+module "k3s_server_1" {
+  source = "../../modules/proxmox-vm-cloud-init"
 
-variable "pm_api_url" {
-  type = string
-}
-variable "pm_api_token_id" {
-  type      = string
-  sensitive = true
-}
-variable "pm_api_token_secret" {
-  type      = string
-  sensitive = true
-}
-
-provider "proxmox" {
-  pm_api_url          = var.pm_api_url
-  pm_api_token_id     = var.pm_api_token_id
-  pm_api_token_secret = var.pm_api_token_secret
-}
-
-resource "proxmox_vm_qemu" "k3s_server_1" {
   name        = "k3s-server-1"
-  target_node = "pve"
+  target_node = var.target_node
 
-  clone = "debian-template"
+  clone_vm_name = var.clone_vm_name
+  vmid          = var.k3s_server_1_vmid
 
-  // Cloud-init
-  #   force_recreate_on_change_of = ""
-  os_type    = "cloud-init"
-  ciuser     = "root"
-  ipconfig0  = "ip=192.168.0.110/24,gw=192.168.0.1"
-  nameserver = "192.168.0.1"
-  ciupgrade  = true
+  ciuser     = var.ciuser
+  ipconfig   = "${var.k3s_server_1_ipconfig},${var.ipconfig_gw}"
+  nameserver = var.nameserver
 
-  // ハードウェア
-  sockets = 1
-  cores   = 4
-  memory  = "4096"
-  scsihw  = "virtio-scsi-pci"
+  sockets = var.k3s_server_sockets
+  cores   = var.k3s_server_cores
+  memory  = var.k3s_server_memory
 
-  // オプション
-  boot   = "order=scsi0;ide2"
-  onboot = true
+  storage_pool = var.storage_pool
+  storage_size = var.k3s_server_storage_size
+}
 
-  disks {
-    ide {
-      ide2 {
-        cloudinit {
-          storage = "local-lvm"
-        }
-      }
-    }
-    scsi {
-      scsi0 {
-        disk {
-          size    = "32G"
-          storage = "local-lvm"
-        }
-      }
-    }
-  }
-  serial {
-    id   = 0
-    type = "socket"
-  }
+// k3s_agent
+module "k3s_agent_1" {
+  source = "../../modules/proxmox-vm-cloud-init"
 
-  lifecycle {
-    ignore_changes = [
-      ciuser,
-      sshkeys,
-      network,
-    ]
-  }
+  name        = "k3s-agent-1"
+  target_node = var.target_node
+
+  clone_vm_name = var.clone_vm_name
+  vmid          = var.k3s_agent_1_vmid
+
+  ciuser     = var.ciuser
+  ipconfig   = "${var.k3s_agent_1_ipconfig},${var.ipconfig_gw}"
+  nameserver = var.nameserver
+
+  sockets = var.k3s_agent_sockets
+  cores   = var.k3s_agent_cores
+  memory  = var.k3s_agent_memory
+
+  storage_pool = var.storage_pool
+  storage_size = var.k3s_agent_storage_size
 }
