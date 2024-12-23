@@ -1,5 +1,0 @@
-- name: Install apt packages
-  ansible.builtin.apt:
-    name:
-      - prometheus-node-exporter
-  become: true

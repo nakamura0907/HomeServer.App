@@ -1,3 +1,0 @@
----
-prometheus_system_group: 'prometheus'
-prometheus_system_user: "{{ prometheus_system_group }}"

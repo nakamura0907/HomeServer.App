@@ -1,6 +1,0 @@
----
-- name: External K3s Cluster Playbook
-  hosts: external_k3s
-  roles:
-    - role: external_k3s_setup
-      tags: external_k3s_setup

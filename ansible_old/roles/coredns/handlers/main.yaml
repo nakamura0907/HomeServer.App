@@ -1,8 +1,0 @@
----
-- name: Restart coredns
-  listen: "restart coredns"
-  become: true
-  ansible.builtin.systemd:
-    daemon_reload: true
-    name: coredns
-    state: restarted

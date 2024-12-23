@@ -1,5 +1,0 @@
----
-coredns_version: 1.8.3
-
-coredns_system_group: "coredns"
-coredns_system_user: "{{ coredns_system_group }}"
