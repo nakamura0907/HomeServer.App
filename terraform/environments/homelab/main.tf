@@ -11,6 +11,7 @@ module "k3s_server_1" {
   ciuser     = var.ciuser
   ipconfig   = "${var.k3s_server_1_ipconfig},${var.ipconfig_gw}"
   nameserver = var.nameserver
+  sshkeys    = var.sshkeys
 
   sockets = var.k3s_server_sockets
   cores   = var.k3s_server_cores
@@ -33,6 +34,7 @@ module "k3s_agent_1" {
   ciuser     = var.ciuser
   ipconfig   = "${var.k3s_agent_1_ipconfig},${var.ipconfig_gw}"
   nameserver = var.nameserver
+  sshkeys    = var.sshkeys
 
   sockets = var.k3s_agent_sockets
   cores   = var.k3s_agent_cores
@@ -54,6 +56,7 @@ module "k3s_agent_2" {
   ciuser     = var.ciuser
   ipconfig   = "${var.k3s_agent_2_ipconfig},${var.ipconfig_gw}"
   nameserver = var.nameserver
+  sshkeys    = var.sshkeys
 
   sockets = var.k3s_agent_sockets
   cores   = var.k3s_agent_cores

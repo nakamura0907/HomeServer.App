@@ -12,6 +12,7 @@ resource "proxmox_vm_qemu" "this" {
   ipconfig0  = var.ipconfig
   nameserver = var.nameserver
   ciupgrade  = true
+  sshkeys    = var.sshkeys
 
   // ハードウェア
   sockets = var.sockets

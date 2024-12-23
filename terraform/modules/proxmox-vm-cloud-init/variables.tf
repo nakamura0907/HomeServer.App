@@ -29,6 +29,11 @@ variable "nameserver" {
   description = "Sets default DNS server for guest."
   type        = string
 }
+variable "sshkeys" {
+  default     = null
+  description = "Newline delimited list of SSH public keys to add to authorized keys file for the cloud-init user."
+  type        = string
+}
 variable "sockets" {
   default     = null
   description = "The number of CPU sockets to allocate to the VM."

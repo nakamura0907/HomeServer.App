@@ -33,6 +33,10 @@ variable "nameserver" {
   type    = string
   default = "192.168.0.1"
 }
+variable "sshkeys" {
+  default = null
+  type    = string
+}
 variable "storage_pool" {
   type    = string
   default = "local-lvm"
