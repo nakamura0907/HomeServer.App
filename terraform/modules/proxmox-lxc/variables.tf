@@ -47,8 +47,8 @@ variable "network_bridge" {
 
 variable "network_firewall" {
   description = "A boolean to enable the firewall on the network interface."
-  type = bool
-  default = true
+  type        = bool
+  default     = true
 }
 
 variable "network_ip" {
