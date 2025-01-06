@@ -39,6 +39,14 @@ resource "proxmox_vm_qemu" "this" {
           storage = var.storage_pool
         }
       }
+      dynamic "scsi2" {
+        for_each = var.add_passthrough ? [1] : []
+        content {
+          passthrough {
+            file = var.passthrough_file
+          }
+        }
+      }
     }
   }
   serial {

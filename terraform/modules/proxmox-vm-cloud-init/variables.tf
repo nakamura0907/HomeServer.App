@@ -57,3 +57,13 @@ variable "storage_size" {
   description = "The size of the created disk. Accepts K for kibibytes, M for mebibytes, G for gibibytes, T for tibibytes. When only a number is provided gibibytes is assumed. Required when type=disk and passthrough=false, Computed when type=disk and passthrough=true."
   type        = string
 }
+variable "add_passthrough" {
+  description = "Wether the physical cdrom drive should be passed through."
+  type        = bool
+  default     = false
+}
+variable "passthrough_file" {
+  description = "Required The full unix file path to the disk."
+  type        = string
+  default     = null
+}

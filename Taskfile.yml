@@ -3,6 +3,7 @@ version: '3'
 vars:
   TERRAFORM_DIR: "./terraform/environments/homelab"
   TERRAFORM_VAR_FILE: "terraform.tfvars"
+  ANSIBLE_DIR: "./ansible"
 
 tasks:
 # terraform
@@ -31,5 +32,10 @@ tasks:
       - terraform apply -var-file="{{.TERRAFORM_VAR_FILE}}" -auto-approve
 
 # ansible
+  ansible:
+    desc: Runs Ansible playbooks
+    dir: "{{.ANSIBLE_DIR}}"
+    cmds:
+      - ansible-playbook site.yml
 
 # kubernetes

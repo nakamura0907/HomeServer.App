@@ -1,4 +1,4 @@
-// provider
+// tfvars
 variable "pm_api_url" {
   type = string
 }
@@ -9,6 +9,9 @@ variable "pm_api_token_id" {
 variable "pm_api_token_secret" {
   type      = string
   sensitive = true
+}
+variable "openmediavault_passthrough_file" {
+  type = string
 }
 
 // Proxmox
@@ -41,6 +44,11 @@ variable "storage_pool" {
   type    = string
   default = "local-lvm"
 }
+variable "lxc_ostemplate" {
+  type    = string
+  default = "local:vztmpl/debian-12-standard_12.2-1_amd64.tar.zst"
+}
+
 // k3s_server_
 variable "k3s_server_sockets" {
   type    = number
@@ -114,4 +122,63 @@ variable "k3s_agent_2_vmid" {
 variable "k3s_agent_2_ipconfig" {
   type    = string
   default = "ip=192.168.0.112/24"
+}
+
+variable "openmediavault_name" {
+  type    = string
+  default = "openmediavault"
+}
+variable "openmediavault_vmid" {
+  type    = number
+  default = 9001
+}
+variable "openmediavault_ipconfig" {
+  type    = string
+  default = "ip=192.168.0.210/24"
+}
+variable "openmediavault_sockets" {
+  type    = number
+  default = 1
+}
+variable "openmediavault_cores" {
+  type    = number
+  default = 1
+}
+variable "openmediavault_memory" {
+  type    = number
+  default = 2048
+}
+variable "openmediavault_storage_size" {
+  type    = string
+  default = "6G"
+}
+
+// LXC - Secret Manager
+variable "secret_manager_cpuunits" {
+  type    = number
+  default = 1024
+}
+variable "secret_manager_hostname" {
+  type    = string
+  default = "secret-manager"
+}
+variable "secret_manager_memory" {
+  type    = number
+  default = 1024
+}
+variable "secret_manager_network_ip" {
+  type    = string
+  default = "192.168.0.211/24"
+}
+variable "secret_manager_rootfs_size" {
+  type    = string
+  default = "8G"
+}
+variable "secret_manager_swap" {
+  type    = number
+  default = 512
+}
+variable "secret_manager_vmid" {
+  type    = number
+  default = 211
 }
