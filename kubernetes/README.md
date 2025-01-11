@@ -13,6 +13,10 @@ helm repo add secrets-store-csi-driver https://kubernetes-sigs.github.io/secrets
 
 helm update
 
+# ラベル
+kubectl label node k3s-agent-1 kubernetes.io/role=worker
+kubectl label node k3s-agent-2 kubernetes.io/role=worke
+
 # 名前空間
 kubectl apply -f ./kubernetes/namespaces
 
