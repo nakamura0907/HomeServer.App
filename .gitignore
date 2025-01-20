@@ -1,2 +1,5 @@
 .kube/*
 !.kube/.gitkeep
+
+**/*.tgz
+**/kubernetes/*/charts
