@@ -66,44 +66,48 @@ module "k3s_agent_2" {
   storage_size = var.k3s_agent_storage_size
 }
 
+// k3s_staging
+
 // NAS
-module "openmediavault" {
-  source = "../../modules/proxmox-vm-cloud-init"
+# module "openmediavault" {
+#   source = "../../modules/proxmox-vm-cloud-init"
 
-  name        = var.openmediavault_name
-  target_node = var.target_node
+#   name        = var.openmediavault_name
+#   target_node = var.target_node
 
-  clone_vm_name = var.clone_vm_name
-  vmid          = var.openmediavault_vmid
+#   clone_vm_name = var.clone_vm_name
+#   vmid          = var.openmediavault_vmid
 
-  ciuser     = var.ciuser
-  ipconfig   = "${var.openmediavault_ipconfig},${var.ipconfig_gw}"
-  nameserver = var.nameserver
-  sshkeys    = var.sshkeys
+#   ciuser     = var.ciuser
+#   ipconfig   = "${var.openmediavault_ipconfig},${var.ipconfig_gw}"
+#   nameserver = var.nameserver
+#   sshkeys    = var.sshkeys
 
-  sockets = var.openmediavault_sockets
-  cores   = var.openmediavault_cores
-  memory  = var.openmediavault_memory
+#   sockets = var.openmediavault_sockets
+#   cores   = var.openmediavault_cores
+#   memory  = var.openmediavault_memory
 
-  storage_pool = var.storage_pool
-  storage_size = var.openmediavault_storage_size
+#   storage_pool = var.storage_pool
+#   storage_size = var.openmediavault_storage_size
 
-  add_passthrough  = true
-  passthrough_file = var.openmediavault_passthrough_file
-}
+#   add_passthrough  = true
+#   passthrough_file = var.openmediavault_passthrough_file
+# }
 
 // Secret Manager
-module "secret_manager" {
-  source = "../../modules/proxmox-lxc"
+# module "secret_manager" {
+#   source = "../../modules/proxmox-lxc"
 
-  target_node = var.target_node
+#   target_node = var.target_node
 
-  ostemplate  = var.lxc_ostemplate
-  cpuunits    = var.secret_manager_cpuunits
-  hostname    = var.secret_manager_hostname
-  memory      = var.secret_manager_memory
-  network_ip  = var.secret_manager_network_ip
-  rootfs_size = var.secret_manager_rootfs_size
-  swap        = var.secret_manager_swap
-  vmid        = var.secret_manager_vmid
-}
+#   ostemplate  = var.lxc_ostemplate
+#   cpuunits    = var.secret_manager_cpuunits
+#   hostname    = var.secret_manager_hostname
+#   memory      = var.secret_manager_memory
+#   network_ip  = var.secret_manager_network_ip
+#   rootfs_size = var.secret_manager_rootfs_size
+#   swap        = var.secret_manager_swap
+#   vmid        = var.secret_manager_vmid
+# }
+
+// development
