@@ -124,13 +124,26 @@ variable "k3s_agent_2_ipconfig" {
   default = "ip=192.168.0.112/24"
 }
 
+variable "k3s_staging_server_1_name" {
+  type    = string
+  default = "k3s-staging-server-1"
+}
+variable "k3s_staging_server_1_vmid" {
+  type    = number
+  default = 9150
+}
+variable "k3s_staging_server_1_ipconfig" {
+  type    = string
+  default = "ip=192.168.0.150/24"
+}
+
 variable "openmediavault_name" {
   type    = string
   default = "openmediavault"
 }
 variable "openmediavault_vmid" {
   type    = number
-  default = 9001
+  default = 9210
 }
 variable "openmediavault_ipconfig" {
   type    = string
@@ -168,7 +181,7 @@ variable "secret_manager_memory" {
 }
 variable "secret_manager_network_ip" {
   type    = string
-  default = "192.168.0.211/24"
+  default = "192.168.0.212/24"
 }
 variable "secret_manager_rootfs_size" {
   type    = string
@@ -180,5 +193,5 @@ variable "secret_manager_swap" {
 }
 variable "secret_manager_vmid" {
   type    = number
-  default = 211
+  default = 212
 }

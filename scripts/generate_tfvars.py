@@ -5,8 +5,16 @@ import sys
 # 環境変数の設定（環境変数名、Terraformキー名、デフォルト値）
 def get_env_vars():
     return [
-        {"env_var": "PM_API_URL", "tf_key": "pm_api_url", "default": ""},
-        {"env_var": "PM_API_TOKEN_ID", "tf_key": "pm_api_token_id", "default": ""},
+        {
+            "env_var": "PM_API_URL",
+            "tf_key": "pm_api_url",
+            "default": "https://192.168.0.200:8006/api2/json",
+        },
+        {
+            "env_var": "PM_API_TOKEN_ID",
+            "tf_key": "pm_api_token_id",
+            "default": "terraform-prov@pve!terraform-token",
+        },
         {
             "env_var": "PM_API_TOKEN_SECRET",
             "tf_key": "pm_api_token_secret",
@@ -16,6 +24,13 @@ def get_env_vars():
             "env_var": "OPENMEDIAVAULT_PASSTHROUGH_FILE",
             "tf_key": "openmediavault_passthrough_file",
             "default": "",
+        },
+        {
+            "env_var": "PROXMOX_SSHKEYS",
+            "tf_key": "sshkeys",
+            "default": """<<EOF
+<公開鍵>
+EOF""",
         },
     ]
 
@@ -61,7 +76,13 @@ def main():
         sys.exit(1)
 
     # terraform.tfvarsファイルの内容を生成
-    content = "\n".join(f'{key} = "{value}"' for key, value in values.items())
+    lines = []
+    for key, value in values.items():
+        if key == "sshkeys":
+            lines.append(f"{key} = {value}")
+        else:
+            lines.append(f'{key} = "{value}"')
+    content = "\n".join(lines) + "\n"
 
     # ファイルに書き込み
     try:
