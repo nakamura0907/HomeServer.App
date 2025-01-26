@@ -135,6 +135,7 @@ module "secret_manager" {
   swap        = var.secret_manager_swap
   vmid        = var.secret_manager_vmid
 }
+# TODO: curlを使ったlocal-execに修正する
 # resource "null_resource" "configure_lxc" {
 #   depends_on = [ module.secret_manager ]
 
