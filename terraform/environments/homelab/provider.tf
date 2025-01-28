@@ -15,3 +15,13 @@ provider "proxmox" {
   // https://github.com/Telmate/terraform-provider-proxmox/issues/173
   pm_parallel         = 4
 }
+
+provider "proxmox" {
+  alias = "rootuser"
+
+  pm_api_url = var.pm_api_url
+  pm_user = var.pm_rootuser
+  pm_password = var.pm_rootpassword
+  pm_parallel = 4
+}
+

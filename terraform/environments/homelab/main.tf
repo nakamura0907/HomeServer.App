@@ -96,6 +96,10 @@ module "k3s_staging_server_1" {
 module "openmediavault" {
   source = "../../modules/proxmox-vm-cloud-init"
 
+  providers = {
+    proxmox = proxmox.rootuser
+  }
+
   name        = var.openmediavault_name
   target_node = var.target_node
 

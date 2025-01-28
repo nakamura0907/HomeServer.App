@@ -13,6 +13,13 @@ variable "pm_api_token_secret" {
 variable "openmediavault_passthrough_file" {
   type = string
 }
+variable "pm_rootuser" {
+  type = string
+}
+variable "pm_rootpassword" {
+    type = string
+    sensitive = true
+}
 
 // Proxmox
 variable "target_node" {

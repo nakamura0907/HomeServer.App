@@ -21,6 +21,16 @@ def get_env_vars():
             "default": "",
         },
         {
+            "env_var": "PM_ROOTUSER",
+            "tf_key": "pm_rootuser",
+            "default": "root@pam",
+        },
+        {
+            "env_var": "PM_ROOTPASSWORD",
+            "tf_key": "pm_rootpassword",
+            "default": "",
+        },
+        {
             "env_var": "OPENMEDIAVAULT_PASSTHROUGH_FILE",
             "tf_key": "openmediavault_passthrough_file",
             "default": "",
