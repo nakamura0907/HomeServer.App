@@ -13,14 +13,14 @@ provider "proxmox" {
   pm_api_token_secret = var.pm_api_token_secret
   // 1にしてもLXC生成時のエラーは解消せず
   // https://github.com/Telmate/terraform-provider-proxmox/issues/173
-  pm_parallel         = 4
+  pm_parallel = 4
 }
 
 provider "proxmox" {
   alias = "rootuser"
 
-  pm_api_url = var.pm_api_url
-  pm_user = var.pm_rootuser
+  pm_api_url  = var.pm_api_url
+  pm_user     = var.pm_rootuser
   pm_password = var.pm_rootpassword
   pm_parallel = 4
 }

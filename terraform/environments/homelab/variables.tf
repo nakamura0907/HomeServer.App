@@ -17,8 +17,8 @@ variable "pm_rootuser" {
   type = string
 }
 variable "pm_rootpassword" {
-    type = string
-    sensitive = true
+  type      = string
+  sensitive = true
 }
 
 // Proxmox

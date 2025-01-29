@@ -90,9 +90,6 @@ module "k3s_staging_server_1" {
 }
 
 // NAS
-// BUGFIX: パススルー周りのエラー解消
-// rootのトークンでも不可能だったためrootユーザでの直接アクセスに変更する
-// https://github.com/Telmate/terraform-provider-proxmox/issues/1056
 module "openmediavault" {
   source = "../../modules/proxmox-vm-cloud-init"
 
@@ -139,24 +136,26 @@ module "secret_manager" {
   swap        = var.secret_manager_swap
   vmid        = var.secret_manager_vmid
 }
-# TODO: curlを使ったlocal-execに修正する
-# resource "null_resource" "configure_lxc" {
-#   depends_on = [ module.secret_manager ]
+resource "null_resource" "configure_lxc" {
+  depends_on = [module.secret_manager]
 
-#   connection {
-#     type = "ssh"
-#     user = "root"
-#     host = var.proxmox_server_ip
-#     private_key = file(var.ssh_private_key_path)
-#   }
+  provisioner "local-exec" {
+    environment = {
+      PM_API_URL = var.pm_api_url
+      NODE       = var.target_node
+      VMID       = var.secret_manager_vmid
+      TOKEN      = "${var.pm_api_token_id}=${var.pm_api_token_secret}"
+    }
+    command = <<EOT
+        curl -k -X PUT "$PM_API_URL/nodes/$NODE/lxc/$VMID/config" \
+            -H "Authorization: PVEAPITOKEN=$TOKEN" \
+            -H "Content-Type: application/json" \
+            -d '{"onboot": 1}'
 
-#   provisioner "remote-exec" {
-#     inline = [
-#       "sleep 10",
-#       "pct set ${var.secret_manager_vmid} --onboot 1",
-#       "pct start ${var.secret_manager_vmid}"
-#      ]
-#   }
-# }
+        curl -k -X POST "$PM_API_URL/nodes/$NODE/lxc/$VMID/status/start" \
+            -H "Authorization: PVEAPIToken=$TOKEN"
+    EOT
+  }
+}
 
 // development
