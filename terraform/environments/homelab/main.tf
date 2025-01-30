@@ -120,8 +120,6 @@ module "openmediavault" {
 }
 
 // Secret Manager
-// BUGFIX: 生成時に起動しない
-// TASK ERROR: can't lock file '/run/lock/lxc/pve-config-212.lock' - got timeout
 module "secret_manager" {
   source = "../../modules/proxmox-lxc"
 
@@ -148,7 +146,7 @@ resource "null_resource" "configure_lxc" {
     }
     command = <<EOT
         curl -k -X PUT "$PM_API_URL/nodes/$NODE/lxc/$VMID/config" \
-            -H "Authorization: PVEAPITOKEN=$TOKEN" \
+            -H "Authorization: PVEAPIToken=$TOKEN" \
             -H "Content-Type: application/json" \
             -d '{"onboot": 1}'
 
