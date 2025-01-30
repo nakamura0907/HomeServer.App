@@ -137,11 +137,11 @@ variable "k3s_staging_server_1_name" {
 }
 variable "k3s_staging_server_1_vmid" {
   type    = number
-  default = 9150
+  default = 9120
 }
 variable "k3s_staging_server_1_ipconfig" {
   type    = string
-  default = "ip=192.168.0.150/24"
+  default = "ip=192.168.0.120/24"
 }
 
 variable "openmediavault_name" {
