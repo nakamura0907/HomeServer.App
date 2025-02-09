@@ -5,17 +5,30 @@
   become: true
   roles:
     - role: k3s-ansible/roles/prereq
-    - role: k3s-ansible/roles/airgap
+    # - role: k3s-ansible/roles/airgap
     - role: k3s-ansible/roles/raspberrypi
 
 - name: Setup K3S server
-  hosts: k3s_cluster:server,k3s_stg_cluster:server
+  hosts: k3s_cluster_server
   become: true
+  vars:
+    server_group: "k3s_cluster_server"
   roles:
     - role: k3s-ansible/roles/k3s_server
 
 - name: Setup K3S agent
-  hosts: k3s_cluster:agent
+  hosts: k3s_cluster_agent
   become: true
+  vars:
+    server_group: "k3s_cluster_server"
   roles:
     - role: k3s-ansible/roles/k3s_agent
+
+# 同じクラスターになってしまうため
+- name: Setup K3S server
+  hosts: k3s_stg_cluster_server
+  become: true
+  vars:
+    server_group: "k3s_stg_cluster_server"
+  roles:
+    - role: k3s-ansible/roles/k3s_server
