@@ -11,6 +11,11 @@ def get_env_vars():
             "default": "https://192.168.0.200:8006/api2/json",
         },
         {
+            "env_var": "PM_TLS_INSECURE",
+            "tf_key": "pm_tls_insecure",
+            "default": "true",
+        },
+        {
             "env_var": "PM_API_TOKEN_ID",
             "tf_key": "pm_api_token_id",
             "default": "terraform-prov@pve!terraform-token",
@@ -88,7 +93,7 @@ def main():
     # terraform.tfvarsファイルの内容を生成
     lines = []
     for key, value in values.items():
-        if key == "sshkeys":
+        if key == "sshkeys" or key == "pm_tls_insecure":
             lines.append(f"{key} = {value}")
         else:
             lines.append(f'{key} = "{value}"')

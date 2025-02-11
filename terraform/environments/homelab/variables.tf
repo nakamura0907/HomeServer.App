@@ -2,6 +2,9 @@
 variable "pm_api_url" {
   type = string
 }
+variable "pm_tls_insecure" {
+  type = bool
+}
 variable "pm_api_token_id" {
   type      = string
   sensitive = true
