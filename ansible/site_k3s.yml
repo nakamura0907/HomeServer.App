@@ -1,0 +1,29 @@
+---
+- name: Cluster prep
+  hosts: k3s_cluster,k3s_stg_cluster
+  gather_facts: true
+  become: true
+  roles:
+    - role: k3s-ansible/roles/prereq
+    # - role: k3s-ansible/roles/airgap
+    - role: k3s-ansible/roles/raspberrypi
+
+- name: Setup K3S server
+  hosts: k3s_cluster_server
+  become: true
+  roles:
+    - role: k3s-ansible/roles/k3s_server
+
+- name: Setup K3S agent
+  hosts: k3s_cluster_agent
+  become: true
+  roles:
+    - role: k3s-ansible/roles/k3s_agent
+
+# 同じクラスターになってしまうため
+- name: Setup K3S server
+  hosts: k3s_stg_cluster_server
+  become: true
+  roles:
+    - role: k3s-ansible/roles/k3s_server
+
