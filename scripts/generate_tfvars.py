@@ -36,6 +36,11 @@ def get_env_vars():
             "default": "",
         },
         {
+            "env_var": "CIPASSWORD",
+            "tf_key": "cipassword",
+            "default": "",
+        },
+        {
             "env_var": "OPENMEDIAVAULT_PASSTHROUGH_FILE",
             "tf_key": "openmediavault_passthrough_file",
             "default": "",

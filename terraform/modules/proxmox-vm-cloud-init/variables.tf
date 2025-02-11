@@ -19,6 +19,11 @@ variable "ciuser" {
   default     = null
   description = "Override the default cloud-init user for provisioning."
   type        = string
+}
+variable "cipassword" {
+  default     = null
+  description = "Override the default cloud-init user's password. Sensitive."
+  type        = string
   sensitive   = true
 }
 variable "ipconfig" {

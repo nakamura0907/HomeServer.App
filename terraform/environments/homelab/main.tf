@@ -9,6 +9,7 @@ module "k3s_server_1" {
   vmid          = var.k3s_server_1_vmid
 
   ciuser     = var.ciuser
+  cipassword = var.cipassword
   ipconfig   = "${var.k3s_server_1_ipconfig},${var.ipconfig_gw}"
   nameserver = var.nameserver
   sshkeys    = var.sshkeys
@@ -32,6 +33,7 @@ module "k3s_agent_1" {
   vmid          = var.k3s_agent_1_vmid
 
   ciuser     = var.ciuser
+  cipassword = var.cipassword
   ipconfig   = "${var.k3s_agent_1_ipconfig},${var.ipconfig_gw}"
   nameserver = var.nameserver
   sshkeys    = var.sshkeys
@@ -54,6 +56,7 @@ module "k3s_agent_2" {
   vmid          = var.k3s_agent_2_vmid
 
   ciuser     = var.ciuser
+  cipassword = var.cipassword
   ipconfig   = "${var.k3s_agent_2_ipconfig},${var.ipconfig_gw}"
   nameserver = var.nameserver
   sshkeys    = var.sshkeys
@@ -77,6 +80,7 @@ module "k3s_staging_server_1" {
   vmid          = var.k3s_staging_server_1_vmid
 
   ciuser     = var.ciuser
+  cipassword = var.cipassword
   ipconfig   = "${var.k3s_staging_server_1_ipconfig},${var.ipconfig_gw}"
   nameserver = var.nameserver
   sshkeys    = var.sshkeys
@@ -104,6 +108,7 @@ module "openmediavault" {
   vmid          = var.openmediavault_vmid
 
   ciuser     = var.ciuser
+  cipassword = var.cipassword
   ipconfig   = "${var.openmediavault_ipconfig},${var.ipconfig_gw}"
   nameserver = var.nameserver
   sshkeys    = var.sshkeys

@@ -9,6 +9,7 @@ resource "proxmox_vm_qemu" "this" {
   #   force_recreate_on_change_of = ""
   os_type    = "cloud-init"
   ciuser     = var.ciuser
+  cipassword = var.cipassword
   ipconfig0  = var.ipconfig
   nameserver = var.nameserver
   ciupgrade  = true
@@ -48,6 +49,11 @@ resource "proxmox_vm_qemu" "this" {
         }
       }
     }
+  }
+  network {
+    id     = 0
+    model  = "e1000"
+    bridge = "vmbr0"
   }
   serial {
     id   = 0

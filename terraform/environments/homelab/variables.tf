@@ -34,8 +34,11 @@ variable "clone_vm_name" {
   default = "debian-template"
 }
 variable "ciuser" {
+  type    = string
+  default = "root"
+}
+variable "cipassword" {
   type      = string
-  default   = "root"
   sensitive = true
 }
 variable "ipconfig_gw" {
